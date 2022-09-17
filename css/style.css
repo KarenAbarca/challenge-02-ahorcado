@@ -1,0 +1,82 @@
+*{
+    background-color: #E6E6FA;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html, body{
+    height: 100%;
+}
+header{
+    height: 5rem;
+    padding: 1rem;
+}
+
+header .logo{
+    height: 100%;
+}
+
+footer *{
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #6b3fa0;
+    text-align: center;
+    color: white;
+}
+
+.main{
+    height: calc(100vh - 10rem);
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+/*ESTILOS INDEX.HTML*/
+.botones{
+    width: 940px;
+    margin: auto auto;
+    text-align: center;
+    align-items: center;
+}
+
+.btn{
+    width: 50%;
+    margin: 1rem 0;
+    padding: 1.2rem 0;
+    font-size: 1.2rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    transition: 1s background;
+}
+
+.btn:hover{
+    opacity: 80%;
+}
+
+.jugar{ 
+    background-color: #663a82;
+    color: white;
+}
+
+.palabra{
+    background-color: plum; 
+}
+
+
+
+/*MEDIA QUERIES*/
+@media screen and (max-width: 1223px){ 
+    .botones{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px){ 
+    .btn{
+        width: 80%;
+    }
+}
