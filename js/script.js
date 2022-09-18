@@ -15,10 +15,21 @@ if(!localStorage.getItem('palabras')){
 
 function jugar(){
     window.open("jugar.html", "_self");
+    
+    var palabraSecreta = seleccionarPalabra();
 }
 
 function abrirPalabra(){
     window.open("nueva-palabra.html","_self");
+}
+
+function seleccionarPalabra(){
+    let arregloLocal = localStorage.getItem('palabras');
+    var palabras = arregloLocal.split(',');
+    var numeroPalabras = palabras.length;
+    var aleatorio = Math.round(Math.random * numeroPalabras);
+    
+    console.log(aleatorio);
 }
 
 function guardarPalabra(){
@@ -36,7 +47,7 @@ function guardarPalabra(){
         else{
             nuevoArreglo.push(palabra);
             localStorage.setItem('palabras', nuevoArreglo);
-            window.open("jugar.html","_self");
+            jugar();
         }   
     }
 }
@@ -44,7 +55,7 @@ function guardarPalabra(){
 //Función que válida que sólo se introduzcan caracteres válidos
 function validarPalabra(palabra){
 
-    if(palabra.match(caracteresProhibidos) || palabra.length > 8){ //El texto a encriptar/desencriptar contiene algún caracter no permitido
+    if(palabra.match(caracteresProhibidos) || palabra.length > 8 || palabra.length < 8){ //El texto a encriptar/desencriptar contiene algún caracter no permitido
         alert('Se deben introducir máximo 8 letras mayúsculas sin acentos o cáracteres especiales');
         return false;
     }
@@ -52,7 +63,6 @@ function validarPalabra(palabra){
         return true;
     }
 }
-
 
 function cancelar(){
     window.open("index.html","_self");

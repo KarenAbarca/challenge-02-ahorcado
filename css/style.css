@@ -72,6 +72,11 @@ footer *{
 
 
 /*ESTILOS NUEVA PALABRA*/
+.container{
+    margin: auto auto;
+    text-align: center;
+    align-items: center;
+}
 .form-group{
     width: 60rem;
     margin-bottom: 2rem;
@@ -120,10 +125,28 @@ footer *{
     .botones{
         width: 100%;
     }
+    .form-group, .botones-horizontal{
+        width: 100%;
+        text-align: center;
+    }
+    .form-group{
+        padding: 1rem;
+    }
 }
 
 @media screen and (max-width: 480px){ 
     .btn{
         width: 80%;
+    }
+    
+    .botones-horizontal{
+        padding: 1rem;    
+    }
+    
+    .btn-horizontal{
+        width: 100%;
+    }
+    .cancelar{
+        margin-left: 0;
     }
 }
