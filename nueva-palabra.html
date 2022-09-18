@@ -23,8 +23,18 @@
         </header>
         
         <main class="main"> 
-            <a href="jugar.html"><button>Nuevo Juego</button></a>
-            <a href="nueva-palabra.html"><button>Agregar Palabra</button></a>
+            
+            <div class="form-group">
+                <textarea class="input-palabra" id="input-palabra" placeholder="Ingrese una palabra"></textarea>
+                <img src="img/Exclamacion.png" alt="Exclamación alerta" class="img-alerta">  
+                <label for="input-palabra" class="alerta">Máximo 8 letras mayúsculas, sin acentos ni carácteres especiales</label>
+            </div>
+      
+            <div class="botones-horizontal">      
+                <button class="btn btn-horizontal jugar" onclick="guardarPalabra()">Guardar y empezar</button>
+                <button class="btn btn-horizontal cancelar" onclick="cancelar()">Cancelar</button>
+            </div>
+            
         </main>
         
         <footer class="footer">
