@@ -1,43 +1,37 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="es">
-
+   
     <head>
+        <title>Challenge 02 - Ahorcado</title>
         
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>Challenge 2 - Ahorcado</title>
-        
-        <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/reset.css">
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-        
     </head>
-
+    
     <body>
         <header>
             <img src="img/K.png" alt="Logo K" class="logo">
         </header>
         
-        <main class="main"> 
-            <section class="botones">
-
-                <button class="btn jugar" id="btnJugar" onclick="jugar()">Nuevo Juego</button>
-
-                <button class="btn palabra" id="btnPalabra" onclick="abrirPalabra()">Agregar Palabra</button>
-
+        <main class="main">
+            <section class="container-botones">
+                <button class="btn btn-jugar" id="btn-jugar" onclick="abrirJugar()">Nuevo Juego</button>
+                <button class="btn btn-palabra" id="btn-nueva-palabra" onclick="abrirNvaPalabra()">Agregar Palabra</button>
             </section>
         </main>
         
-        <footer class="footer">
+        <footer>
             <p class="copyright">&copy Copyright Karen Stephanie Abarca García 2022</p>
         </footer>
-        
     </body>
-
+    
     <script src="js/script.js"></script>
     
 </html>

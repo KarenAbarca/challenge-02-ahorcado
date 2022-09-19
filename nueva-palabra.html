@@ -1,49 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="es">
-
+   
     <head>
-        
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        
         <title>Ahorcado - Nueva Palabra</title>
         
-        <link rel="stylesheet" href="css/reset.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/reset.css">
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-        
     </head>
-
+    
     <body>
         <header>
             <img src="img/K.png" alt="Logo K" class="logo">
         </header>
         
-        <main class="main"> 
+        <main class="main">
+            <section class="form-palabra">
+                <textarea id="input-palabra" placeholder="Ingrese una palabra" class="input-palabra"></textarea>
+                <img src="img/Exclamacion.png" alt="Signo de exclamación de alerta" class="img-alerta">
+                <label for="input-palabra" class="alerta">Máximo 8 letras mayúsculas, sin acentos ni carácteres especiales</label>
+            </section>
             
-            <div class="container">
-                <div class="form-group">
-                    <textarea class="input-palabra" id="input-palabra" placeholder="Ingrese una palabra"></textarea>
-                    <img src="img/Exclamacion.png" alt="Exclamación alerta" class="img-alerta">  
-                    <label for="input-palabra" class="alerta">Máximo 8 letras mayúsculas, sin acentos ni carácteres especiales</label>
-                </div>
-
-                <div class="botones-horizontal">      
-                    <button class="btn btn-horizontal jugar" onclick="guardarPalabra()">Guardar y empezar</button>
-                    <button class="btn btn-horizontal cancelar" onclick="cancelar()">Cancelar</button>
-                </div>
-            </div>
+            <section class="container-botones">
+                <button class="btn btn-horizontal btn-jugar" id="btn-jugar" onclick="agregarPalabra()">Guardar y empezar</button>
+                <button class="btn btn-horizontal btn-palabra" id="btn-nueva-palabra" onclick="abrirIndex()">Cancelar</button>
+            </section>
         </main>
         
-        <footer class="footer">
+        <footer>
             <p class="copyright">&copy Copyright Karen Stephanie Abarca García 2022</p>
         </footer>
-        
     </body>
-
+    
     <script src="js/script.js"></script>
     
 </html>

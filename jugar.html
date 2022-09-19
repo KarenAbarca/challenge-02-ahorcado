@@ -1,38 +1,42 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="es">
-
+   
     <head>
+        <title>Ahorcado - Jugar</title>
         
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title>Ahorcado</title>
-        
-        <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/reset.css">
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-        
     </head>
-
-    <body>
+    
+    <body onload="iniciarJuego()">
         <header>
             <img src="img/K.png" alt="Logo K" class="logo">
         </header>
         
-        <main class="main"> 
-            <a href="jugar.html"><button>Nuevo Juego</button></a>
-            <a href="nueva-palabra.html"><button>Agregar Palabra</button></a>
+        <main class="main" id="main-juego">
+            <section class="container-canvas" id="container-canvas">
+                <canvas>k</canvas>
+            </section>
+            
+            <section class="container-botones">
+                <button class="btn btn-horizontal btn-jugar" id="btn-jugar" onclick="abrirJugar()">Nuevo Juego</button>
+                <button class="btn btn-horizontal btn-palabra" id="btn-nueva-palabra" onclick="abrirNvaPalabra()">Agregar Palabra</button>
+            </section>
         </main>
         
-        <footer class="footer">
+        <footer>
             <p class="copyright">&copy Copyright Karen Stephanie Abarca García 2022</p>
         </footer>
-        
     </body>
-
-    <script src="js/script.js"></script>
     
+    <script src="js/canvas.js"></script>
+    <script src="js/script.js"></script>
+       
 </html>
