@@ -38,6 +38,10 @@ html,body{
     border: none;
     color: black;
     margin: 1rem auto;
+    transition: 1s background;
+}
+.btn:hover{
+    opacity: 80%;
 }
 
 .btn-jugar{

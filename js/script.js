@@ -1,8 +1,10 @@
-var anchura, espacio, palabraSecreta;
+var anchura, espacio, palabraSecreta, idx;
 const arregloPalabras = ['MANZANA', 'CAZUELA', 'ARCOIRIS', 'ESTRELLA', 'ARMONIA', 
                        'BANDERA', 'ABRAZO', 'POETA', 'COSTAS', 'CUERVO', 
                        'CUPIDO', 'SASTRE', 'MONEDA', 'ANILLOS', 'DOMINGO', 
                        'HERMOSA', 'VALIENTE', 'INVIERNO', 'SALUDO', 'CABEZA'];
+var teclasPresionadas = [];
+var letrasCorrectas, errores = 0;
 
 //Regex sólo máyusculas (sin acentos y caracteres especiales)
 var caracteresProhibidos= /([^A-Z]{1,8})/g;
@@ -63,14 +65,55 @@ function validarPalabra(palabra){
 
 /*Funciones Juego*/
 function iniciarJuego(){
-    
+
     palabraSecreta = sortearPalabra();
     
     inicializarCanvas();
-    dibujarLineas();
+    dibujarLineas(palabraSecreta);
     
-    window.addEventListener('keypress', verificarLetra)
+    document.addEventListener('keypress', teclaPresionada);
+}
 
+    
+function teclaPresionada(event) {
+    
+    var esLetra = verificarLetra(event);  
+    var caracter = (event.key).toUpperCase(); //Se transforma la letra en mayuscula
+    var repetida = teclasPresionadas.includes(caracter);
+    
+    //No ha sido presionada y es una letra
+    if(!repetida && esLetra){
+
+        teclasPresionadas.push(caracter); //Se ingresa en las presionadas
+
+        var indices = existeLetra(caracter); //Se recuperan los indices de la letra presionada
+
+        //No existe la letra
+        if(indices.length == 0){
+            errores++;
+            //Dibujar monito
+            //Dibujar letras equivocadas
+        }
+
+        //Existe letra en la palabra Secreta, se dibuja sobre la línea correspondiente
+        for(var i = 0 ; i < indices.length ; i++){
+            dibujarLetras(indices[i]);
+            letrasCorrectas++;
+        }
+    }
+
+    //El usuario ha atinado todas las letras, fin del juego y mensaje victorioso
+    if(letrasCorrectas == palabraSecreta.length){
+        setTimeout(mostrarGanaste, 500);
+        document.removeEventListener('keypress', teclaPresionada);
+    }
+
+    //El usuario ha agotado sus intentos
+    if(errores == 7){
+        mostrarFin(palabraSecreta); 
+        document.removeEventListener('keypress', teclaPresionada);
+    }
+    
 }
 
 function sortearPalabra(){
@@ -84,41 +127,23 @@ function sortearPalabra(){
     return palabraSecreta;
 }
 
-function dibujarLetras(indice){
-    
-    pincel.fillStyle = "purple";
-    pincel.font="40px Montserrat";
-    pincel.textAlign = 'center';
-    pincel.fillText(palabraSecreta[indice], (anchura*indice) + (espacio*indice)+(anchura/2), canvas.height - 15, anchura);
-
-}
-
 function verificarLetra(tecla){
     
     var caracter = (tecla.key).toUpperCase();
     var valorAscii = caracter.charCodeAt(caracter);
 
     if(valorAscii >= 65 && valorAscii <=90){
-        existeLetra(caracter);
         return true;
     }
 }
 
 function existeLetra(caracter){
-    console.log(palabraSecreta);
     var indices = [];
-    var letrasPalabra = palabraSecreta.split('');
-    var idx = letrasPalabra.indexOf(caracter);
-    
-    if(idx == -1){
-       console.log('la letra no existe');
-        return false;
-    }
-    
+    var letras = palabraSecreta.split('');
+    var idx = letras.indexOf(caracter);
     while (idx != -1) {
-        console.log(idx);
-        dibujarLetras(idx);
         indices.push(idx);
-        idx = letrasPalabra.indexOf(caracter, idx + 1);
-    }
+        idx = letras.indexOf(caracter, idx + 1);  
+    }  
+    return indices;
 }

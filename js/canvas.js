@@ -11,7 +11,7 @@ function inicializarCanvas(){
     pincel.fillRect(0,0,canvas.width, canvas.height)
 }
 
-function dibujarLineas(){
+function dibujarLineas(palabraSecreta){
     var numLetras = palabraSecreta.length;
     anchura = ((canvas.width * .8) / numLetras) ; //Las líneas van a ocupar el 80% del espacio del canvas
     espacio = (canvas.width* .2) / (numLetras-1); //Los espacios van a ocupar el 20% del espacio del canvas
@@ -28,4 +28,33 @@ function dibujarLineas(){
         posicionX = posicionX + anchura + espacio;
     }
     
+}
+
+function dibujarLetras(indice){
+    
+    pincel.fillStyle = "purple";
+    pincel.font="40px Montserrat";
+    pincel.textAlign = 'center';
+    pincel.fillText(palabraSecreta[indice], (anchura*indice) + (espacio*indice)+(anchura/2), canvas.height - 15, anchura);
+
+}
+
+
+function mostrarGanaste(){
+    pincel.clearRect(0, 0, canvas.width, canvas.height);
+    pincel.fillStyle = "purple";
+    pincel.font="40px Montserrat";
+    pincel.textAlign = 'center';
+    pincel.fillText("¡FELICIDADES!", canvas.width/2, canvas.height/2);
+    pincel.fillText("¡GANASTE!", canvas.width/2, (canvas.height/2)+50);
+}
+
+function mostrarFin(palabraSecreta){
+    pincel.clearRect(0, 0, canvas.width, canvas.height);
+    pincel.fillStyle = "purple";
+    pincel.font="40px Montserrat";
+    pincel.textAlign = 'center';
+    pincel.fillText("¡Fin del juego!", canvas.width/2, canvas.height/2-50);
+    pincel.fillText("La palabra era", canvas.width/2, (canvas.height/2));
+    pincel.fillText(palabraSecreta, canvas.width/2, (canvas.height/2)+50);
 }
