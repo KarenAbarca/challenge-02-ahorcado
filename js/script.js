@@ -4,7 +4,7 @@ const arregloPalabras = ['MANZANA', 'CAZUELA', 'ARCOIRIS', 'ESTRELLA', 'ARMONIA'
                        'CUPIDO', 'SASTRE', 'MONEDA', 'ANILLOS', 'DOMINGO', 
                        'HERMOSA', 'VALIENTE', 'INVIERNO', 'SALUDO', 'CABEZA'];
 var teclasPresionadas = [];
-var letrasCorrectas, errores = 0;
+var letrasCorrectas=0, errores = 0;
 
 //Regex sólo máyusculas (sin acentos y caracteres especiales)
 var caracteresProhibidos= /([^A-Z]{1,8})/g;
@@ -69,8 +69,7 @@ function iniciarJuego(){
     palabraSecreta = sortearPalabra();
     
     inicializarCanvas();
-    dibujarLineas(palabraSecreta);
-    
+    dibujarLineas(palabraSecreta);   
     document.addEventListener('keypress', teclaPresionada);
 }
 
@@ -91,26 +90,30 @@ function teclaPresionada(event) {
         //No existe la letra
         if(indices.length == 0){
             errores++;
-            //Dibujar monito
-            //Dibujar letras equivocadas
+        
+            dibujarMunieco(errores); //Dibujar ahorcado
+        
+            dibujarEquivocadas(caracter, errores); //Dibujar letras equivocadas
         }
 
         //Existe letra en la palabra Secreta, se dibuja sobre la línea correspondiente
         for(var i = 0 ; i < indices.length ; i++){
             dibujarLetras(indices[i]);
             letrasCorrectas++;
+            console.log(letrasCorrectas + " de " + palabraSecreta.length);
         }
     }
 
     //El usuario ha atinado todas las letras, fin del juego y mensaje victorioso
     if(letrasCorrectas == palabraSecreta.length){
         setTimeout(mostrarGanaste, 500);
+        console.log('ganaste');
         document.removeEventListener('keypress', teclaPresionada);
     }
 
     //El usuario ha agotado sus intentos
     if(errores == 7){
-        mostrarFin(palabraSecreta); 
+        setTimeout(mostrarFin, 500); 
         document.removeEventListener('keypress', teclaPresionada);
     }
     
