@@ -84,10 +84,10 @@ function teclaPresionada(event) {
     console.log('presionada');
     var esLetra = verificarLetra(event);  
     var caracter = (event.key).toUpperCase(); //Se transforma la letra en mayuscula
-    var repetida = teclasPresionadas.includes(caracter);
+    
     
     //No ha sido presionada y es una letra
-    if(!repetida && esLetra){
+    if(esLetra){
 
         controladorJuego(caracter);
     }
@@ -100,40 +100,45 @@ function teclaMovilPresionada(){
 }
 
 function controladorJuego(caracter) {
-
-    teclasPresionadas.push(caracter); //Se ingresa en las presionadas
-
-    var indices = existeLetra(caracter); //Se recuperan los indices de la letra presionada
-
-    //No existe la letra
-    if(indices.length == 0){
-        errores++;
-
-        dibujarMunieco(errores); //Dibujar ahorcado
-
-        dibujarEquivocadas(caracter, errores); //Dibujar letras equivocadas
-    }
-
-    //Existe letra en la palabra Secreta, se dibuja sobre la línea correspondiente
-    for(var i = 0 ; i < indices.length ; i++){
-        dibujarLetras(indices[i]);
-        letrasCorrectas++;
-        console.log(letrasCorrectas + " de " + palabraSecreta.length);
-    }
-        
-    //El usuario ha atinado todas las letras, fin del juego y mensaje victorioso
-    if(letrasCorrectas == palabraSecreta.length){
-        setTimeout(mostrarGanaste, 500);
-        console.log('ganaste');
-        document.removeEventListener('keypress', teclaPresionada);
-    }
-
-    //El usuario ha agotado sus intentos
-    if(errores == 7){
-        setTimeout(mostrarFin, 500); 
-        document.removeEventListener('keypress', teclaPresionada);
-    }
     
+    var repetida = teclasPresionadas.includes(caracter);
+    if(!repetida){
+       
+        var tecladoMovil = document.querySelector("#teclado-movil");
+        teclasPresionadas.push(caracter); //Se ingresa en las presionadas
+
+        var indices = existeLetra(caracter); //Se recuperan los indices de la letra presionada
+
+        //No existe la letra
+        if(indices.length == 0){
+            errores++;
+
+            dibujarMunieco(errores); //Dibujar ahorcado
+
+            dibujarEquivocadas(caracter, errores); //Dibujar letras equivocadas
+        }
+
+        //Existe letra en la palabra Secreta, se dibuja sobre la línea correspondiente
+        for(var i = 0 ; i < indices.length ; i++){
+            dibujarLetras(indices[i]);
+            letrasCorrectas++;
+            console.log(letrasCorrectas + " de " + palabraSecreta.length);
+        }
+
+        //El usuario ha atinado todas las letras, fin del juego y mensaje victorioso
+        if(letrasCorrectas == palabraSecreta.length){
+            setTimeout(mostrarGanaste, 500);
+            tecladoMovil.style.display = "none";
+            document.removeEventListener('keypress', teclaPresionada);
+        }
+
+        //El usuario ha agotado sus intentos
+        if(errores == 7){
+            setTimeout(mostrarFin, 500); 
+            tecladoMovil.style.display = "none";
+            document.removeEventListener('keypress', teclaPresionada);
+        }
+    }
 }
 
 function sortearPalabra(){

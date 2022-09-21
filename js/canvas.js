@@ -33,7 +33,7 @@ function dibujarLetras(indice){
 
 function dibujarEquivocadas(caracter, errores){
     console.log(caracter);
-    var anchura = canvas.width / 11;
+    var anchura = canvas.width / 9;
     imprimir(caracter, anchura*(errores+1), canvas.height - 10, "black");
 }
 
