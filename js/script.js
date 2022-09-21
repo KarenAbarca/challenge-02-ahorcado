@@ -71,11 +71,17 @@ function iniciarJuego(){
     inicializarCanvas();
     dibujarLineas(palabraSecreta);   
     document.addEventListener('keypress', teclaPresionada);
+    
+    
+    var teclasMoviles = document.querySelectorAll(".tecla");
+    for(var i = 0 ; i<teclasMoviles.length ; i++){
+        teclasMoviles[i].addEventListener("click", teclaMovilPresionada);    
+    }
 }
 
     
 function teclaPresionada(event) {
-    
+    console.log('presionada');
     var esLetra = verificarLetra(event);  
     var caracter = (event.key).toUpperCase(); //Se transforma la letra en mayuscula
     var repetida = teclasPresionadas.includes(caracter);
@@ -83,27 +89,38 @@ function teclaPresionada(event) {
     //No ha sido presionada y es una letra
     if(!repetida && esLetra){
 
-        teclasPresionadas.push(caracter); //Se ingresa en las presionadas
+        controladorJuego(caracter);
+    }
+    
+}
 
-        var indices = existeLetra(caracter); //Se recuperan los indices de la letra presionada
+function teclaMovilPresionada(){
+    controladorJuego(this.value);
+    //console.log(teclasMoviles);
+}
 
-        //No existe la letra
-        if(indices.length == 0){
-            errores++;
-        
-            dibujarMunieco(errores); //Dibujar ahorcado
-        
-            dibujarEquivocadas(caracter, errores); //Dibujar letras equivocadas
-        }
+function controladorJuego(caracter) {
 
-        //Existe letra en la palabra Secreta, se dibuja sobre la línea correspondiente
-        for(var i = 0 ; i < indices.length ; i++){
-            dibujarLetras(indices[i]);
-            letrasCorrectas++;
-            console.log(letrasCorrectas + " de " + palabraSecreta.length);
-        }
+    teclasPresionadas.push(caracter); //Se ingresa en las presionadas
+
+    var indices = existeLetra(caracter); //Se recuperan los indices de la letra presionada
+
+    //No existe la letra
+    if(indices.length == 0){
+        errores++;
+
+        dibujarMunieco(errores); //Dibujar ahorcado
+
+        dibujarEquivocadas(caracter, errores); //Dibujar letras equivocadas
     }
 
+    //Existe letra en la palabra Secreta, se dibuja sobre la línea correspondiente
+    for(var i = 0 ; i < indices.length ; i++){
+        dibujarLetras(indices[i]);
+        letrasCorrectas++;
+        console.log(letrasCorrectas + " de " + palabraSecreta.length);
+    }
+        
     //El usuario ha atinado todas las letras, fin del juego y mensaje victorioso
     if(letrasCorrectas == palabraSecreta.length){
         setTimeout(mostrarGanaste, 500);
